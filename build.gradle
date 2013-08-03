@@ -1,0 +1,32 @@
+buildscript {
+	repositories {
+		maven {
+			url 'http://jenkins-windows.labtool.francetelecom.fr:8081/artifactory/plugins-release'
+			credentials {
+				username = "${artifactory_user}"
+				password = "${artifactory_password}"
+			}
+		}
+		dependencies {
+			classpath(group: 'org.gradlefx', name: 'gradlefx', version: '0.6.4')
+		}
+	}
+}
+
+apply plugin: 'gradlefx'
+
+group = 'com.pnwrain'
+
+dependencies {
+	flexSDK group: 'com.adobe', name: 'flex-sdk', version: '4.6', ext: 'zip'
+}
+
+playerVersion = '11.1'
+output = "$name-$version"
+
+type = 'swc'
+
+srcDirs = ['src', 'support/web-socket-js/flash-src']
+resourceDirs = []
+testDirs = []
+testResourceDirs = []
